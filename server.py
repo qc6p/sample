@@ -66,7 +66,7 @@ def read_root():
 
 # 新規TODOを作成するエンドポイント
 @app.post("/todos", response_model=TodoResponse)
-def create_todo(todo: Todo):
+def create_todo(todo: int):
     with sqlite3.connect("todos.db") as conn:
         cursor = conn.execute(
             # SQLインジェクション対策のためパラメータ化したSQL文を使用
