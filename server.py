@@ -88,7 +88,7 @@ def get_todos():
 
 # 指定されたIDのTODOを取得するエンドポイント
 @app.get("/todos/{todo_id}")
-def get_todo(todo_id: Todo):
+def get_todo(todo_id: int):
     with sqlite3.connect("todos.db") as conn:
         # 指定されたIDのTODOを検索
         todo = conn.execute(
@@ -100,7 +100,7 @@ def get_todo(todo_id: Todo):
 
 # 指定されたIDのTODOを更新するエンドポイント
 @app.put("/todos/{todo_id}")
-def update_todo(todo_id: Todo, todo: Todo):
+def update_todo(todo_id: int, todo: Todo):
     with sqlite3.connect("todos.db") as conn:
         # タイトルと完了状態を更新
         cursor = conn.execute(
@@ -114,7 +114,7 @@ def update_todo(todo_id: Todo, todo: Todo):
 
 # 指定されたIDのTODOを削除するエンドポイント
 @app.delete("/todos/{todo_id}")
-def delete_todo(todo_id: Todo):
+def delete_todo(todo_id: int):
     with sqlite3.connect("todos.db") as conn:
         # 指定されたIDのTODOを削除
         cursor = conn.execute("DELETE FROM todos WHERE id = ?", (todo_id,))
